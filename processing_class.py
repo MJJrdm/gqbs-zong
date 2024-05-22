@@ -91,9 +91,6 @@ class ProcessingPlan:
 
         production_time_column_start_index, _ = PlanData.start_end_col_num('生产时间', data.col_names_dict)
         delivery_time_column_start_index, _ = PlanData.start_end_col_num('新纳期', data.col_names_dict)
-        # print(f'production_time_column_start_index: {production_time_column_start_index}')
-        # print(f'delivery_time_column_start_index: {delivery_time_column_start_index}')
-
 
         for row in data.ws.iter_rows(min_row = 3, values_only = True):
             delivery_time = row[delivery_time_column_start_index - 1]

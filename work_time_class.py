@@ -31,7 +31,10 @@ class WorkTime:
         dates_column = []
         for i in self.raw_dates_column:
             dates_column.append((self.change_to_date(i[0]), i[1]))
+            # print(i[0]) -> 45350 / 45353 / 45356
+            # print(i[1]) -> '三' / '四' / '日'
         self.dates_column = dates_column
+        # print(self.dates_column) -> [(datetime.date(2024, 2, 28), '三'), (datetime.date(2024, 2, 29), '四'), ....]
     
 
     ##### 班别列表，存储产线上所有的班别
@@ -47,7 +50,8 @@ class WorkTime:
                         break
                 break
         self.shifts_column = shifts_column
-    
+        # print(f'shifts_column: {shifts_column}') -> ['甲班', '乙班']
+
 
     def extract_work_time(self):
         line_worktime = {}
@@ -65,6 +69,13 @@ class WorkTime:
                         break
                 break
         self.line_worktime = line_worktime
+        # print(line_worktime) -> {
+        #                           '甲班': ['08:00-18:00', '08:00-18:00', '08:00-18:00', 
+        #                                    '08:00-18:00', nan, '18:30-04:30', '18:30-04:30'], 
+        # 
+        #                           '乙班': ['18:30-04:30', '18:30-04:30', '18:30-04:30', '18:30-04:30', 
+        #                                    nan, '08:00-18:00', '08:00-18:00']
+        #                         }
     
 
     def return_worktime_info_dict(self):
