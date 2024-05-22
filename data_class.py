@@ -7,7 +7,6 @@ class PlanData:
         self.df = df
         self.fill_columns()
         self.get_sorted_df()
-        self.col_names_dict = self.col_names_to_dict()
 
 
     @classmethod
@@ -67,6 +66,8 @@ class PlanData:
             group_num = row[('分组', '分组子列')]
             self.df.at[index, ('新纳期', '新纳期子列')] = min_due_in_groups[group_num]
     
+        self.col_names_dict = self.col_names_to_dict()
+
 
     def get_sorted_df(self):
         self.sorted_df = self.df.sort_values(by = [('新纳期', '新纳期子列'), # 纳期为第一优先级

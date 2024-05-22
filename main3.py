@@ -20,7 +20,7 @@ def main():
                                      ('分组', '分组子列')], 
                                      ascending=[True, False, True, True]).reset_index(drop = True)
     # 调整计划生产时间
-    adjust_time(sorted_df)
+    adjust_change_knife_time(sorted_df)
 
     col_names_dict = col_names_to_dict(sorted_df.columns)
     wb, ws = to_wb_ws(sorted_df)

@@ -132,7 +132,7 @@ def combine_cells(sorted_df, ws, col_names_dict):
     
 
 ##### 调整生产时间，如果相邻的计划不属于同一个方案但裁切方式相同，那么靠后的计划时间减去3分钟的换刀时间
-def adjust_time(sorted_df):
+def adjust_change_knife_time(sorted_df):
     for index, row in sorted_df.iterrows():
         if index == 0:
             previous_row_group = row[('分组', '分组子列')]
