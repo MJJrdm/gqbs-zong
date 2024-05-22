@@ -170,9 +170,9 @@ def compute_outer_radius(total_weight, width, num, density = 7.85, inner_radius 
     # 单位是mm，需要注意需要转成m的情况
 
 
-##### 检查排刀外径是否小于设备外径
-def compare_outer_radius(coil_outer_radius, machine_outer_radius = 100):
-    return (coil_outer_radius < machine_outer_radius)
+##### 检查排刀外径是否大于要求外径上限
+def compare_outer_radius(coil_outer_radius, maximum_outer_radius):
+    return (coil_outer_radius < maximum_outer_radius)
 
 
 ##### 计算一卷母材有多长
