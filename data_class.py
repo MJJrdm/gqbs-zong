@@ -1,6 +1,7 @@
 import pandas as pd
 from openpyxl import Workbook
 
+
 class PlanData:
     def __init__(self, df):
         self.df = df
@@ -141,7 +142,7 @@ class PlanData:
                 previous_parent_coil_number = row[('母材信息', '钢卷号')]
 
 
-    ##### 合并具有相同信息的"母材信息"单元格和"加工信息"单元格
+    ##### 合并第一行的列"母材信息"单元格和列"加工信息"单元格
     def merge_column_names(self):
         keys = ['母材信息', '加工信息']
         for key in keys:
