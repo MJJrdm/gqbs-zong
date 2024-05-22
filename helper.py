@@ -71,7 +71,7 @@ def to_wb_ws(sorted_df):
     return wb,ws
 
 
-##### 返回某一个连续出现的值的开始行数和结束行数，后续作为合并单元格的起始点
+##### key对应列名开始与结束的位置
 def start_end_col_num(key, col_names_dict):
     set_start = False
     for i in col_names_dict:
@@ -83,7 +83,7 @@ def start_end_col_num(key, col_names_dict):
     return (col_start_num, col_end_num)
 
 
-##### 合并具有相同信息的"母材信息"单元格和"加工信息"单元格
+##### 合并第一行列"母材信息"单元格和列"加工信息"单元格
 def merge_column_names(ws, col_names_dict):
     keys = ['母材信息', '加工信息']
     for key in keys:
@@ -96,7 +96,7 @@ def combine_cells(sorted_df, ws, col_names_dict):
     for index, row in sorted_df.iterrows():
         if index == 0:
             group_start_row = index + 3
-            group_end_row = index + 3
+            group_end_row = index + 3 
             parent_start_row = index + 3
             parent_end_row = index + 3
             previous_row = row[('分组', '分组子列')]
@@ -112,12 +112,12 @@ def combine_cells(sorted_df, ws, col_names_dict):
                                    end_column = col_names_dict[('生产时间', '生产时间子列')])
                 
                     ws.merge_cells(start_row = group_start_row, 
-                                    start_column = col_names_dict[('加工信息', '加工方式')], 
-                                    end_row = group_end_row, 
-                                    end_column = col_names_dict[('加工信息', '加工方式')])
+                                   start_column = col_names_dict[('加工信息', '加工方式')], 
+                                   end_row = group_end_row, 
+                                   end_column = col_names_dict[('加工信息', '加工方式')])
                 
                 group_start_row, group_end_row = index + 3, index + 3 
-                getattr
+
             start_num, end_num = start_end_col_num('母材信息', col_names_dict)
             if row[('母材信息', '钢卷号')] == previous_parent_coil_number and row[('母材信息', '钢卷号')] != '/':
                 parent_end_row = index + 3
@@ -165,18 +165,14 @@ def compute_total_time(col_names_dict, ws):
 
 
 ##### 计算排刀外径（目前存在问题，内径不知道是否固定还是可以设置为508，密度也不知道是否是固定的）
-def compute_outer_radius(total_weight, width, num, density = 7850, inner_radius = 508):
-    return np.sqrt(4000000000 * total_weight / np.pi / width / num / density + inner_radius ** 2)
+def compute_outer_radius(total_weight, width, num, density = 7.85, inner_radius = 508):
+    return np.sqrt(4000000 * total_weight / np.pi / width / num / density + inner_radius ** 2)
     # 单位是mm，需要注意需要转成m的情况
+
 
 ##### 检查排刀外径是否小于设备外径
 def compare_outer_radius(coil_outer_radius, machine_outer_radius = 100):
     return (coil_outer_radius < machine_outer_radius)
-
-
-##### 
-
-
 
 
 ##### 计算一卷母材有多长
