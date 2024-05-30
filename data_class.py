@@ -9,6 +9,7 @@ class PlanData:
         self.get_sorted_df()
 
 
+    ##### 读取数据
     @classmethod
     def read_data(cls, file_path):
         df = pd.read_excel(file_path, header = [0, 1])
@@ -16,6 +17,7 @@ class PlanData:
         return instance
     
 
+    ##### 把dataframe的列名转为字典，键为列名，值为列的顺序（从1开始）
     def col_names_to_dict(self):
         col_names_dict = {}
         for i, col_name in enumerate(self.df.columns, 1):
@@ -65,7 +67,7 @@ class PlanData:
         for index, row in self.df.iterrows():
             group_num = row[('分组', '分组子列')]
             self.df.at[index, ('新纳期', '新纳期子列')] = min_due_in_groups[group_num]
-    
+
         self.col_names_dict = self.col_names_to_dict()
 
 
